@@ -1,0 +1,100 @@
+import { useNavigation } from "@react-navigation/native";
+import { Button, Checkbox, HStack, Text, View, VStack } from "native-base";
+import React from "react";
+import InputComponent from "../../components/Input/InputComponent";
+import TextLogin3 from "../../components/Text/TextLogin/TextLogin3";
+import TextLoginLabel from "../../components/Text/TextLogin/TextLoginLabel";
+import TextSubmit from "../../components/Text/TextProfile/TextSubmit";
+import Color from "../../constants/Color";
+import { Ionicons } from "@expo/vector-icons";
+import TextLogin from "../../components/Text/TextLogin/TextLogin";
+import TextLoginLsit from "../../components/Text/TextLogin/TextLoginList";
+
+const Step04Components = [
+  {
+    name: "กองทุนเสรี",
+  },
+  {
+    name: "สินค้า otop",
+  },
+  {
+    name: "ข้อมูลความจำเป็นพื้นฐาน (จปฐ.)",
+  },
+  {
+    name: "เศรษฐกิจฐานราก",
+  },
+  {
+    name: "ทุนชุมชน",
+  },
+  {
+    name: "โคกหนองนา",
+  },
+  {
+    name: "ผู้นำ",
+  },
+];
+
+const Step4 = ({ step }) => {
+  const navigation = useNavigation();
+  const NextStep = () => {
+    navigation.navigate("Tab");
+  };
+
+  const Back = () => {
+    navigation.setParams({
+      step: step - 1,
+    });
+  };
+  return (
+    <View w="100%">
+      <VStack ml="10%" h="80%">
+        <View mb="5%">
+          <TextLoginLabel>4</TextLoginLabel>
+          <TextLoginLabel>รายการระบบ</TextLoginLabel>
+        </View>
+        {Step04Components.map((data, index) => {
+          return (
+            <HStack w="90%" key={index} mt="3%">
+              <HStack
+                ml="2%"
+                space={4}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Checkbox
+                  value="test"
+                  accessibilityLabel="This is a dummy checkbox"
+                  size="lg"
+                />
+                <TextLoginLsit>{data.name}</TextLoginLsit>
+              </HStack>
+            </HStack>
+          );
+        })}
+      </VStack>
+      <VStack space={2} w="90%" justifyItems="center" alignSelf="center">
+        <Button
+          size="12"
+          w="100%"
+          colorScheme={Color.Button}
+          onPress={NextStep}
+        >
+          <HStack justifyContent="center" alignItems="center" space={2}>
+            <TextSubmit>ถัดไป</TextSubmit>
+            <Ionicons name="arrow-forward" size={24} color="white" />
+          </HStack>
+        </Button>
+        
+        <Button size="12" w="100%" colorScheme={Color.Button} onPress={Back} variant="ghost">
+        <HStack justifyContent='center' alignItems='center' space={2}>
+        
+          <Ionicons name="arrow-back" size={24} color={Color.Button} />
+          <TextSubmit color>กลับ</TextSubmit>
+          </HStack>
+        </Button>
+      </VStack>
+    </View>
+  );
+};
+
+export default Step4;
